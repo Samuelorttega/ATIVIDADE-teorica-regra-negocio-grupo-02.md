@@ -126,7 +126,7 @@ CREATE TABLE clientes (
     cidade VARCHAR(100),
     estado VARCHAR(2),
     data_cadastro DATE
-);
+
 
  Um analista precisa analisar a quantidade de clientes por cidade e estado. Para essa atividade, ele não precisa acessar CPF ou telefone.
 
