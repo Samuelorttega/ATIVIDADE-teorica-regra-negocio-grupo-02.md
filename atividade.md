@@ -5,3 +5,4 @@
 **Repositorio Git:** https://github.com/Samuelorttega/ATIVIDADE-teorica-regra-negocio-grupo-02.md/edit/main/atividade.md
 
 ##  Resumo Executivo
+estoy cansado ya 
