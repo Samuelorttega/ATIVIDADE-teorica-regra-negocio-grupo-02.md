@@ -1,10 +1,10 @@
 # ATIVIDADE-teorica-regra-negocio-grupo-02.md
 **Aluno(s):** 1.Lucas Moretti Izel Do Carmo 2.Paulo Emilio De Souza Fagundes 3.Samuel Jose Ortega Jimenez 
-**Turna:** G2 BANCO DE DADOS 
+**Turma:** G2 BANCO DE DADOS 
 **Data:** 17/08/2026 
-**Repositorio Git:** https://github.com/Samuelorttega/ATIVIDADE-teorica-regra-negocio-grupo-02.md/edit/main/atividade.md
+**Repositorio Git:**
 
-##Resumo Executivo
+## Resumo Executivo
 
  A Inteligência Artificial (IA) generativa pode facilitar o trabalho com bancos de dados, principalmente na criação de consultas SQL a partir de perguntas feitas em linguagem natural. Isso pode aumentar a produtividade e ajudar usuários que não possuem conhecimento avançado de SQL.
 
@@ -12,9 +12,9 @@
 
  O grupo defende que a IA não deve ser proibida, mas também não deve possuir acesso irrestrito ao banco. A utilização deve ocorrer com controles como menor privilégio, roles, views, permissões, auditoria e monitoramento.
 
-##1. Desenvolvimento Teórico
+## 1. Desenvolvimento Teórico
 
-###1.1 O que é o DBA e quais suas funções?
+### 1.1 O que é o DBA e quais suas funções?
 
  O DBA (Database Administrator) é o profissional responsável pela administração e pelo controle do banco de dados.
 
@@ -34,7 +34,7 @@ Entre suas principais funções estão:
 
  Com a utilização de IA, o trabalho do DBA se torna ainda mais importante, pois é necessário controlar também como as ferramentas de IA podem acessar e utilizar os dados.
 
-###1.2 Perfis de usuários de banco de dados
+### 1.2 Perfis de usuários de banco de dados
 
  Os bancos de dados podem possuir diferentes tipos de usuários.
 
@@ -48,23 +48,23 @@ Entre suas principais funções estão:
 
  Cada perfil possui necessidades diferentes. Portanto, os acessos devem ser definidos de acordo com a função e a necessidade de cada usuário.
 
-###1.3 Riscos do uso de IA por usuários especialistas
+### 1.3 Riscos do uso de IA por usuários especialistas
 
-A utilização de IA pode trazer benefícios, mas também apresenta riscos.
+ A utilização de IA pode trazer benefícios, mas também apresenta riscos.
 
-Consulta incorreta: a IA pode gerar uma consulta que esteja correta na sintaxe, mas errada na lógica. Isso pode produzir resultados incorretos.
+ Consulta incorreta: a IA pode gerar uma consulta que esteja correta na sintaxe, mas errada na lógica. Isso pode produzir resultados incorretos.
 
-Exposição de dados sensíveis: o usuário pode enviar informações reais, como CPF, telefone ou dados de clientes, para uma ferramenta externa de IA.
+ Exposição de dados sensíveis: o usuário pode enviar informações reais, como CPF, telefone ou dados de clientes, para uma ferramenta externa de IA.
 
-Degradação de performance: uma consulta criada pela IA pode consumir muitos recursos do banco e prejudicar outros usuários e sistemas.
+ Degradação de performance: uma consulta criada pela IA pode consumir muitos recursos do banco e prejudicar outros usuários e sistemas.
 
-Vazamento por prompts: informações presentes nos comandos enviados à IA podem conter dados que não deveriam sair do ambiente da organização.
+ Vazamento por prompts: informações presentes nos comandos enviados à IA podem conter dados que não deveriam sair do ambiente da organização.
 
-Esses problemas podem afetar a segurança, a privacidade e a integridade das informações.
+ Esses problemas podem afetar a segurança, a privacidade e a integridade das informações.
 
-Por isso, consultas criadas por IA devem ser verificadas antes da execução, e os usuários devem receber orientação sobre quais informações podem utilizar nas ferramentas de IA.
+ Por isso, consultas criadas por IA devem ser verificadas antes da execução, e os usuários devem receber orientação sobre quais informações podem utilizar nas ferramentas de IA.
 
-##'1.4 Distribuição segura de dados
+### 1.4 Distribuição segura de dados
 
  Uma das principais formas de proteger os dados é utilizar o princípio do menor privilégio. Isso significa que cada usuário deve receber apenas as permissões necessárias para realizar sua função.
 
@@ -78,11 +78,11 @@ Controle de execução: permissões podem definir quais operações um usuário 
 
 Auditoria: permite registrar e acompanhar acessos e operações realizadas no banco.
 
-Conformidade com a LGPD: os dados pessoais devem ser tratados de acordo com as regras e princípios estabelecidos pela legislação.
+ Conformidade com a LGPD: os dados pessoais devem ser tratados de acordo com as regras e princípios estabelecidos pela legislação.
 
-Por exemplo, um funcionário que precisa analisar vendas por cidade não precisa necessariamente ter acesso ao CPF e ao telefone dos clientes.
+ Por exemplo, um funcionário que precisa analisar vendas por cidade não precisa necessariamente ter acesso ao CPF e ao telefone dos clientes.
 
-###1.5 Atuação do DBA no cenário de IA
+### 1.5 Atuação do DBA no cenário de IA
 
 No cenário de utilização de IA, o DBA deve continuar controlando o ambiente do banco de dados.
 
@@ -100,7 +100,7 @@ Entre suas principais atividades estão:
 
 O DBA também pode ajudar a definir quais ambientes devem ser utilizados para análises. Sempre que possível, consultas analíticas podem ser realizadas em bancos de análise ou réplicas de leitura, reduzindo o impacto no banco de produção.
 
-###1.6 Análise crítica: qual a melhor abordagem?
+### 1.6 Análise crítica: qual a melhor abordagem?
 
  Existem duas soluções extremas: proibir completamente a IA ou permitir acesso irrestrito.
 
@@ -114,7 +114,7 @@ O DBA também pode ajudar a definir quais ambientes devem ser utilizados para an
 
  A IA deve ser vista como uma ferramenta de apoio e não como uma autoridade sobre o banco de dados. O usuário deve verificar os resultados e o banco deve continuar aplicando suas próprias regras de segurança.
 
-2. Exemplos e Casos
+## 2. Exemplos e Casos
 
 Considere uma empresa que possui uma tabela chamada "clientes":
 
@@ -172,28 +172,28 @@ Caso prático: sistema de vendas
 
  Assim, mesmo que a IA gere uma consulta tentando acessar informações que o usuário não possui permissão para consultar, o PostgreSQL pode bloquear o acesso, desde que as permissões estejam configuradas corretamente.
 
-##3. Referências
+## 3. Referências
 
 AUTIO, Chloe et al. Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile. NIST AI 600-1. 2024. Disponível em: https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence. Acesso em: 16 ago. 2026.
 
-NIST. Least Privilege. Computer Security Resource Center Glossary. Disponível em: https://csrc.nist.gov/glossary/term/least_privilege. Acesso em: 16 ago. 2026.
+ NIST. Least Privilege. Computer Security Resource Center Glossary. Disponível em: https://csrc.nist.gov/glossary/term/least_privilege. Acesso em: 16 ago. 2026.
 
-POSTGRESQL GLOBAL DEVELOPMENT GROUP. PostgreSQL Documentation: Database Roles. Disponível em: https://www.postgresql.org/docs/18/user-manag.html. Acesso em: 16 ago. 2026.
+ POSTGRESQL GLOBAL DEVELOPMENT GROUP. PostgreSQL Documentation: Database Roles. Disponível em: https://www.postgresql.org/docs/18/user-manag.html. Acesso em: 16 ago. 2026.
 
-POSTGRESQL GLOBAL DEVELOPMENT GROUP. PostgreSQL Documentation: Privileges. Disponível em: https://www.postgresql.org/docs/current/ddl-priv.html. Acesso em: 16 ago. 2026.
+ POSTGRESQL GLOBAL DEVELOPMENT GROUP. PostgreSQL Documentation: Privileges. Disponível em: https://www.postgresql.org/docs/current/ddl-priv.html. Acesso em: 16 ago. 2026.
 
-POSTGRESQL GLOBAL DEVELOPMENT GROUP. PostgreSQL Documentation: CREATE VIEW. Disponível em: https://www.postgresql.org/docs/current/sql-createview.html. Acesso em: 16 ago. 2026.
+ POSTGRESQL GLOBAL DEVELOPMENT GROUP. PostgreSQL Documentation: CREATE VIEW. Disponível em: https://www.postgresql.org/docs/current/sql-createview.html. Acesso em: 16 ago. 2026.
 
-BRASIL. Lei nº 13.709, de 14 de agosto de 2018 — Lei Geral de Proteção de Dados Pessoais (LGPD). Disponível em: https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm. Acesso em: 16 ago. 2026.
+ BRASIL. Lei nº 13.709, de 14 de agosto de 2018 — Lei Geral de Proteção de Dados Pessoais (LGPD). Disponível em: https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm. Acesso em: 16 ago. 2026.
 
-##4. Conclusões
+## 4. Conclusões
 
-A utilização de IA em bancos de dados pode trazer benefícios importantes, principalmente para a criação de consultas e realização de análises.
+ A utilização de IA em bancos de dados pode trazer benefícios importantes, principalmente para a criação de consultas e realização de análises.
 
-Entretanto, o acesso aos dados deve ser controlado. O uso de menor privilégio, roles, views, permissões, auditoria e monitoramento ajuda a reduzir os riscos.
+ Entretanto, o acesso aos dados deve ser controlado. O uso de menor privilégio, roles, views, permissões, auditoria e monitoramento ajuda a reduzir os riscos.
 
-Também ficou claro que o DBA continua tendo um papel fundamental. Ele deve controlar os acessos, acompanhar o desempenho, proteger os dados e ajudar a definir políticas para utilização da IA.
+ Também ficou claro que o DBA continua tendo um papel fundamental. Ele deve controlar os acessos, acompanhar o desempenho, proteger os dados e ajudar a definir políticas para utilização da IA.
 
-O grupo conclui que a melhor solução não é proibir a IA nem permitir acesso irrestrito. A melhor alternativa é utilizar a IA como ferramenta de apoio, mantendo o controle dos dados e da segurança no banco de dados.
+ O grupo conclui que a melhor solução não é proibir a IA nem permitir acesso irrestrito. A melhor alternativa é utilizar a IA como ferramenta de apoio, mantendo o controle dos dados e da segurança no banco de dados.
 
-Dessa forma, é possível aproveitar os benefícios da IA sem deixar de lado a segurança, a privacidade, a integridade e a conformidade com a LGPD.
+ Dessa forma, é possível aproveitar os benefícios da IA sem deixar de lado a segurança, a privacidade, a integridade e a conformidade com a LGPD.
