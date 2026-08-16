@@ -3,7 +3,10 @@
 **Aluno(s):** 
 
 1.Lucas Moretti Izel Do Carmo 
-2.Paulo Emilio De Souza Fagundes 3.Samuel Jose Ortega Jimenez 
+
+2.Paulo Emilio De Souza Fagundes 
+
+3.Samuel Jose Ortega Jimenez 
 
 **Turma:** G2 BANCO DE DADOS 
 **Data:** 16/08/2026 
