@@ -4,282 +4,138 @@
 **Data:** 17/08/2026 
 **Repositorio Git:** https://github.com/Samuelorttega/ATIVIDADE-teorica-regra-negocio-grupo-02.md/edit/main/atividade.md
 
-##  Resumo Executivo
- A utilização de Inteligência Artificial (IA) generativa modificou a forma como usuários especialistas e analistas interagem com bancos de dados. Ferramentas capazes de transformar linguagem natural em comandos SQL podem aumentar a produtividade e facilitar a realização de consultas e análises. Entretanto, permitir que essas ferramentas tenham acesso amplo aos dados pode criar riscos relacionados à segurança, privacidade, desempenho e governança.
+Resumo Executivo
 
- Este trabalho defende que a utilização de IA em ambientes de banco de dados não deve ser proibida, mas também não deve ocorrer com acesso irrestrito. A solução mais adequada é uma arquitetura baseada em camadas de proteção, utilizando o princípio do menor privilégio, papéis (Roles), Views, controle de permissões, auditoria e separação entre ambientes de produção e análise.
+A Inteligência Artificial (IA) generativa pode facilitar o trabalho com bancos de dados, principalmente na criação de consultas SQL a partir de perguntas feitas em linguagem natural. Isso pode aumentar a produtividade e ajudar usuários que não possuem conhecimento avançado de SQL.
 
- O princípio do menor privilégio estabelece que usuários e processos devem receber somente os acessos necessários para realizar suas atividades. Esse princípio é reconhecido pelo NIST como uma prática de segurança.
+Por outro lado, permitir que ferramentas de IA tenham acesso amplo aos dados pode gerar riscos, como exposição de informações sensíveis, consultas incorretas e problemas de desempenho.
 
- No PostgreSQL, o controle de acesso é realizado por meio de Roles e privilégios, permitindo determinar quais usuários podem acessar determinados objetos e executar determinadas operações.
-
- Dessa forma, a presença da IA não elimina a importância do DBA. Pelo contrário, aumenta a necessidade de governança, controle de acesso, avaliação de riscos e monitoramento do ambiente.
+O grupo defende que a IA não deve ser proibida, mas também não deve possuir acesso irrestrito ao banco. A utilização deve ocorrer com controles como menor privilégio, roles, views, permissões, auditoria e monitoramento.
 
 1. Desenvolvimento Teórico
 
-1.1 O problema: Inteligência Artificial e Bancos de Dados
+1.1 O que é o DBA e quais suas funções?
 
-A Inteligência Artificial generativa pode auxiliar profissionais na criação de consultas SQL a partir de perguntas realizadas em linguagem natural. Essa capacidade pode reduzir o tempo necessário para construir consultas e permitir que usuários com diferentes níveis de conhecimento técnico realizem análises de dados.
+O DBA (Database Administrator) é o profissional responsável pela administração e pelo controle do banco de dados.
 
-Porém, existe uma diferença importante entre gerar uma consulta SQL e garantir que essa consulta seja segura, correta e adequada ao ambiente em que será executada.
+Entre suas principais funções estão:
 
-Uma IA pode gerar uma consulta sintaticamente válida, mas isso não significa necessariamente que a consulta esteja correta do ponto de vista do negócio. Uma consulta pode utilizar tabelas inadequadas, produzir resultados incorretos, acessar informações que não deveriam estar disponíveis ou consumir recursos excessivos do banco.
-
-O NIST destaca que sistemas de IA generativa apresentam riscos que podem surgir ou ser agravados durante diferentes etapas do ciclo de vida da IA, sendo necessário identificar, avaliar e gerenciar esses riscos.
-
-Por isso, a principal questão analisada neste trabalho é:
-
-Como permitir que usuários especialistas utilizem IA para realizar análises sem comprometer a segurança, a privacidade e o desempenho do banco de dados?
-
-Nossa posição é que a IA deve ser permitida, porém dentro de limites técnicos e administrativos definidos pela organização.
-
-1.2 O papel do DBA
-
- ⁶O Administrador de Banco de Dados (DBA - Database Administrator) é responsável por atividades relacionadas à administração, segurança, disponibilidade, desempenho e organização do banco de dados.
-
- No contexto da utilização de IA, o papel do DBA torna-se ainda mais importante porque ele deve estabelecer limites para o acesso aos dados e garantir que as ferramentas utilizadas pelos usuários não tenham privilégios superiores aos necessários.
-
-Entre suas principais responsabilidades estão:
-
-- administrar usuários e Roles;
-- conceder e revogar privilégios;
-- controlar o acesso às tabelas, Views e outros objetos;
+- definir e organizar a estrutura do banco de dados;
+- administrar usuários e roles;
+- controlar permissões de acesso;
+- aplicar regras de integridade;
 - acompanhar o desempenho do banco;
-- definir políticas de segurança;
 - realizar auditorias;
-- proteger informações sensíveis;
-- manter estratégias de backup e recuperação;
-- auxiliar na definição de políticas para utilização de IA.
+- proteger informações importantes;
+- realizar e verificar backups;
+- auxiliar na recuperação dos dados quando necessário.
 
- No PostgreSQL, as permissões são controladas por meio de privilégios, como "SELECT", "INSERT", "UPDATE", "DELETE", "EXECUTE" e "USAGE". Esses privilégios podem ser concedidos a Roles específicas.
+No PostgreSQL, o DBA pode utilizar roles e privilégios para controlar quais usuários podem consultar, inserir, alterar ou excluir informações.
 
- Portanto, o DBA não deve ser visto apenas como a pessoa que "cuida do banco". No cenário analisado, ele também participa da governança do acesso aos dados e da utilização segura da IA.
+Com a utilização de IA, o trabalho do DBA se torna ainda mais importante, pois é necessário controlar também como as ferramentas de IA podem acessar e utilizar os dados.
 
----
+1.2 Perfis de usuários de banco de dados
 
-1.3 Usuários de banco de dados e níveis de acesso
+Os bancos de dados podem possuir diferentes tipos de usuários.
 
-Os bancos de dados podem ser utilizados por diferentes tipos de usuários, cada um com necessidades específicas.
+Programadores de aplicações: desenvolvem sistemas que utilizam o banco. Possuem acesso de acordo com as funções da aplicação. A principal vantagem é a possibilidade de automatizar tarefas, mas uma aplicação mal desenvolvida pode causar problemas de segurança.
 
-Programadores de aplicações
+Usuários sofisticados: possuem conhecimento técnico e podem realizar consultas diretamente no banco utilizando SQL e outras ferramentas. Possuem maior autonomia, mas precisam de limites para evitar acessos desnecessários.
 
-São profissionais que desenvolvem sistemas responsáveis por acessar o banco de dados.
+Usuários especialistas: possuem conhecimento mais avançado e podem criar consultas complexas, análises e utilizar ferramentas de IA. Mesmo assim, ser especialista não significa precisar acessar todos os dados.
 
-Eles normalmente utilizam consultas SQL dentro das aplicações e precisam de permissões compatíveis com as funções que o sistema executa.
+Usuários navegantes: normalmente utilizam sistemas ou aplicações prontas para consultar informações. Possuem menos conhecimento técnico e, por isso, geralmente não precisam acessar diretamente as tabelas do banco.
 
-O principal risco está relacionado à implementação inadequada das aplicações, como consultas inseguras ou falhas de validação de entrada.
+Cada perfil possui necessidades diferentes. Portanto, os acessos devem ser definidos de acordo com a função e a necessidade de cada usuário.
 
-Usuários sofisticados ou analistas
+1.3 Riscos do uso de IA por usuários especialistas
 
-São usuários que possuem conhecimento suficiente para realizar consultas diretamente no banco de dados e produzir relatórios ou análises.
+A utilização de IA pode trazer benefícios, mas também apresenta riscos.
 
-Possuem maior autonomia, mas essa autonomia não deve significar acesso irrestrito.
+Consulta incorreta: a IA pode gerar uma consulta que esteja correta na sintaxe, mas errada na lógica. Isso pode produzir resultados incorretos.
 
-Um analista que precisa analisar vendas, por exemplo, pode não precisar visualizar CPF, telefone ou informações de cartão dos clientes.
+Exposição de dados sensíveis: o usuário pode enviar informações reais, como CPF, telefone ou dados de clientes, para uma ferramenta externa de IA.
 
-Usuários especialistas
+Degradação de performance: uma consulta criada pela IA pode consumir muitos recursos do banco e prejudicar outros usuários e sistemas.
 
-São usuários com conhecimento técnico mais avançado, capazes de desenvolver consultas complexas, scripts e utilizar ferramentas de IA para apoiar análises.
+Vazamento por prompts: informações presentes nos comandos enviados à IA podem conter dados que não deveriam sair do ambiente da organização.
 
-O fato de um usuário ser especialista não significa que ele precise ter acesso a todas as informações.
+Esses problemas podem afetar a segurança, a privacidade e a integridade das informações.
 
-Essa é uma questão importante para a segurança:
+Por isso, consultas criadas por IA devem ser verificadas antes da execução, e os usuários devem receber orientação sobre quais informações podem utilizar nas ferramentas de IA.
 
-Conhecimento técnico e necessidade de acesso são conceitos diferentes.
+1.4 Distribuição segura de dados
 
-O acesso deve ser determinado pela função exercida e pela necessidade real de utilização dos dados.
+Uma das principais formas de proteger os dados é utilizar o princípio do menor privilégio. Isso significa que cada usuário deve receber apenas as permissões necessárias para realizar sua função.
 
-Usuários finais
+No PostgreSQL, algumas medidas importantes são:
 
-São usuários que normalmente interagem com o banco de dados por meio de sistemas, sites ou aplicativos.
+Roles: permitem organizar permissões de acordo com as funções dos usuários.
 
-Nesse caso, o acesso aos dados é intermediado pela aplicação, proporcionando maior controle sobre as operações disponíveis.
+Views: permitem disponibilizar somente determinadas colunas ou informações de uma tabela.
 
----
+Controle de execução: permissões podem definir quais operações um usuário pode realizar, como "SELECT", "INSERT", "UPDATE" e "DELETE".
 
-1.4 Riscos da utilização de IA por usuários especialistas
+Auditoria: permite registrar e acompanhar acessos e operações realizadas no banco.
 
-A utilização de IA para gerar SQL pode trazer benefícios, mas também apresenta riscos que precisam ser considerados.
+Conformidade com a LGPD: os dados pessoais devem ser tratados de acordo com as regras e princípios estabelecidos pela legislação.
 
-a) Consultas incorretas
+Por exemplo, um funcionário que precisa analisar vendas por cidade não precisa necessariamente ter acesso ao CPF e ao telefone dos clientes.
 
-A IA pode produzir uma consulta que seja válida do ponto de vista sintático, mas incorreta do ponto de vista lógico.
+1.5 Atuação do DBA no cenário de IA
 
-Por exemplo, pode realizar uma associação inadequada entre tabelas e produzir um relatório com resultados incorretos.
+No cenário de utilização de IA, o DBA deve continuar controlando o ambiente do banco de dados.
 
-Esse problema é especialmente importante porque o usuário pode confiar no resultado apenas porque a consulta foi produzida por uma ferramenta de IA.
+Entre suas principais atividades estão:
 
-Por isso, consultas geradas automaticamente devem ser analisadas e validadas antes de serem utilizadas em decisões importantes.
+- definir políticas de acesso;
+- criar e administrar roles;
+- acompanhar consultas e desempenho;
+- realizar auditorias;
+- orientar os usuários sobre segurança;
+- proteger dados sensíveis;
+- controlar o acesso das aplicações;
+- realizar backups;
+- acompanhar possíveis problemas causados por consultas geradas por IA.
 
-b) Exposição de informações
+O DBA também pode ajudar a definir quais ambientes devem ser utilizados para análises. Sempre que possível, consultas analíticas podem ser realizadas em bancos de análise ou réplicas de leitura, reduzindo o impacto no banco de produção.
 
- Outro risco é o envio de informações do banco para ferramentas externas de IA.
+1.6 Análise crítica: qual a melhor abordagem?
 
-Um usuário pode, por exemplo, copiar uma estrutura de banco ou dados reais para uma ferramenta de IA com o objetivo de pedir ajuda para construir uma consulta.
+Existem duas soluções extremas: proibir completamente a IA ou permitir acesso irrestrito.
 
-Essa prática pode expor informações que deveriam permanecer dentro da organização.
+A proibição pode reduzir alguns riscos, mas também elimina benefícios da IA, como aumento de produtividade e auxílio na criação de consultas.
 
-Por esse motivo, a organização deve estabelecer regras claras sobre quais dados podem ser enviados para ferramentas externas.
+Por outro lado, permitir acesso irrestrito pode causar problemas de segurança, exposição de dados e perda de desempenho.
 
-c) Consultas com alto consumo de recursos
+Por isso, o grupo considera que a melhor abordagem está entre essas duas opções.
 
-Uma consulta gerada automaticamente pode ser tecnicamente válida, mas apresentar baixo desempenho.
+A IA deve ser permitida, mas dentro de limites definidos pela organização. O acesso deve utilizar menor privilégio, roles, views, permissões e monitoramento.
 
-Uma consulta inadequada pode consumir muitos recursos do servidor, especialmente quando executada sobre grandes volumes de dados.
+A IA deve ser vista como uma ferramenta de apoio e não como uma autoridade sobre o banco de dados. O usuário deve verificar os resultados e o banco deve continuar aplicando suas próprias regras de segurança.
 
-Por isso, consultas produzidas por IA não devem ser consideradas automaticamente otimizadas.
+2. Exemplos e Casos
 
-O DBA deve estabelecer mecanismos de controle e monitoramento para evitar que consultas inadequadas prejudiquem outros usuários e aplicações.
+Considere uma empresa que possui uma tabela chamada "clientes":
 
-d) Acesso acima do necessário
+CREATE TABLE clientes (
+    id_cliente INTEGER,
+    nome VARCHAR(100),
+    cpf VARCHAR(14),
+    telefone VARCHAR(20),
+    cidade VARCHAR(100),
+    estado VARCHAR(2),
+    data_cadastro DATE
+);
 
-Um dos maiores riscos ocorre quando a IA ou o usuário recebe permissões maiores do que realmente precisa.
+Um analista precisa analisar a quantidade de clientes por cidade e estado. Para essa atividade, ele não precisa acessar CPF ou telefone.
 
-Se uma conta utilizada por uma ferramenta de IA possuir acesso a todas as tabelas do banco, uma única consulta poderá expor informações que não fazem parte da finalidade da análise.
+Primeiro, pode ser criada uma role:
 
-Essa situação contradiz o princípio do menor privilégio, segundo o qual o acesso deve ser limitado ao mínimo necessário para realizar a atividade.
-
-1.5 Distribuição segura dos dados
-
-A distribuição segura dos dados deve começar pela definição de quais informações cada usuário realmente necessita.
-
-Nossa proposta utiliza cinco mecanismos principais:
-
-1. Menor privilégio
-
-Cada usuário, aplicação ou ferramenta deve receber somente os privilégios necessários para executar suas atividades.
-
-O NIST define o princípio do menor privilégio como a restrição dos privilégios de usuários ou processos ao mínimo necessário para realizar suas tarefas.
-
-2. Roles
-
-Em vez de conceder permissões individualmente para cada usuário, a organização pode criar Roles relacionadas às funções existentes.
-
-O PostgreSQL utiliza Roles para controlar o acesso aos objetos do banco. Uma Role pode representar um usuário ou um grupo e pode receber privilégios específicos.
-
-Isso facilita a administração porque as permissões podem ser associadas às funções desempenhadas pelos usuários.
-
-3. Views
-
-As Views podem ser utilizadas para disponibilizar somente as informações necessárias para determinada atividade.
-
-Por exemplo, um analista pode precisar conhecer a cidade e o estado dos clientes, mas não precisa conhecer o CPF ou o telefone.
-
-Assim, uma View pode apresentar somente as colunas necessárias para a análise.
-
-Entretanto, é importante destacar que uma View não deve ser considerada uma solução de segurança isolada. As permissões sobre a View e sobre os objetos relacionados também precisam ser configuradas corretamente. A documentação do PostgreSQL apresenta regras específicas sobre privilégios e segurança na utilização de Views.
-
-4. Auditoria
-
-Os acessos e operações importantes devem ser registrados e analisados.
-
-A auditoria permite identificar comportamentos anormais, acessos indevidos e tentativas de extração excessiva de informações.
-
-5. Separação de ambientes
-
-Sempre que possível, atividades analíticas realizadas com auxílio de IA devem ocorrer em ambientes destinados à análise, como bancos de dados analíticos ou réplicas de leitura, em vez de permitir que a IA tenha acesso irrestrito ao banco de produção.
-
-Essa separação reduz o risco de uma consulta analítica inadequada afetar diretamente sistemas que dependem do banco de produção.
-
----
-
-1.6 Relação com a LGPD
-
-A segurança do banco de dados também deve considerar a Lei Geral de Proteção de Dados (LGPD).
-
-A LGPD estabelece princípios para o tratamento de dados pessoais, incluindo finalidade, adequação e necessidade. O princípio da necessidade determina que o tratamento deve ser limitado ao mínimo necessário para alcançar suas finalidades.
-
-Esse princípio possui relação direta com o menor privilégio.
-
-Por exemplo, se um analista precisa apenas conhecer a cidade dos clientes para realizar uma análise de vendas, não existe justificativa técnica para que ele receba também acesso ao CPF, telefone ou endereço completo.
-
-Assim, limitar o acesso não é somente uma questão técnica de segurança, mas também uma medida relacionada à proteção de dados pessoais.
-
----
-
-1.7 Análise crítica: permitir ou proibir a IA?
-
-Existem duas alternativas extremas para o problema analisado.
-
-Alternativa 1: Proibir a utilização de IA
-
-Uma organização poderia simplesmente proibir seus funcionários de utilizar ferramentas de IA para trabalhar com bancos de dados.
-
-Essa abordagem pode reduzir determinados riscos, mas também apresenta desvantagens.
-
-A IA pode trazer ganhos de produtividade e auxiliar profissionais em tarefas de desenvolvimento e análise. Além disso, uma proibição absoluta pode estimular o uso de ferramentas não autorizadas, dificultando o controle pela organização.
-
-Alternativa 2: Permitir acesso irrestrito à IA
-
-A segunda alternativa seria permitir que usuários e ferramentas de IA tenham acesso amplo ao banco de dados.
-
-Essa abordagem oferece grande autonomia, mas cria riscos significativos.
-
-Uma IA com acesso irrestrito poderia consultar informações que o usuário não deveria visualizar ou executar consultas que consumam recursos excessivos.
-
-Alternativa defendida pelo grupo
-
-Nossa posição é que nenhuma das duas alternativas extremas é a melhor solução.
-
-A organização deve permitir a utilização da IA, mas estabelecer uma arquitetura de segurança capaz de limitar os riscos.
-
-Essa decisão está alinhada à ideia de gerenciamento de riscos apresentada pelo NIST, que propõe identificar, avaliar e gerenciar riscos relacionados à IA em vez de simplesmente ignorar ou aceitar esses riscos.
-
-Portanto, a IA deve ser considerada uma ferramenta auxiliar, e não uma autoridade sobre o banco de dados.
-
----
-
-1.8 Arquitetura de defesa em camadas
-
-A arquitetura proposta pelo grupo pode ser representada da seguinte maneira:
-
-Usuário Especialista
-        |
-        v
-Ferramenta de IA
-        |
-        v
-Camada de Controle
-(Roles + Permissões)
-        |
-        v
-Views / Dados Tratados
-        |
-        v
-Banco Analítico ou Réplica de Leitura
-        |
-        v
-Monitoramento e Auditoria
-
-O ponto principal dessa arquitetura é impedir que a IA tenha acesso direto e irrestrito às tabelas brutas do banco de produção.
-
-A IA pode auxiliar na construção da consulta, mas o banco continua sendo protegido por mecanismos de autorização e controle.
-
----
-
-2. Exemplo Prático em PostgreSQL
-
-Considere uma empresa que possui uma tabela "clientes" com informações como:
-
-- "id_cliente";
-- "nome";
-- "cpf";
-- "telefone";
-- "endereco";
-- "cidade";
-- "estado";
-- "data_cadastro".
-
-Um analista precisa utilizar IA para analisar a distribuição dos clientes por cidade e estado.
-
-Ele não precisa ter acesso ao CPF, telefone ou endereço.
-
-Uma solução seria criar uma Role específica e uma View contendo somente os dados necessários.
-
--- 1. Criação da Role utilizada pelo analista
 CREATE ROLE analista_ia LOGIN;
 
--- 2. Criação de uma View com somente os dados necessários
+Depois, pode ser criada uma view contendo somente as informações necessárias:
+
 CREATE VIEW clientes_visiveis AS
 SELECT
     id_cliente,
@@ -288,82 +144,56 @@ SELECT
     data_cadastro
 FROM clientes;
 
--- 3. Permissão para utilizar o schema
+Em seguida, podem ser definidas as permissões:
+
 GRANT USAGE ON SCHEMA public TO analista_ia;
 
--- 4. Permissão de leitura somente sobre a View
 GRANT SELECT ON clientes_visiveis TO analista_ia;
 
--- 5. Garantia de que a Role não possui acesso direto à tabela original
 REVOKE ALL ON clientes FROM analista_ia;
 
-No PostgreSQL, o comando "GRANT" permite conceder privilégios específicos, enquanto "REVOKE" pode ser utilizado para retirar privilégios anteriormente concedidos.
+Também é necessário verificar se o usuário não recebeu acesso à tabela por meio de outra role ou de permissões concedidas ao "PUBLIC".
 
-Nesse cenário, o usuário pode consultar:
+O analista poderá realizar uma consulta como:
 
 SELECT cidade, estado, COUNT(*)
 FROM clientes_visiveis
 GROUP BY cidade, estado;
 
-Porém, ele não deve possuir permissão para executar:
+Nesse caso, ele consegue realizar a análise sem precisar acessar diretamente CPF e telefone.
 
-SELECT cpf, telefone, endereco
-FROM clientes;
+Caso prático: sistema de vendas
 
-Esse exemplo demonstra o princípio do menor privilégio na prática: o usuário recebe acesso somente às informações necessárias para sua atividade.
+Imagine uma empresa que possui um sistema de vendas. Os analistas precisam consultar a quantidade de vendas por cidade, enquanto os dados pessoais dos clientes devem permanecer protegidos.
 
----
+Uma ferramenta de IA pode ajudar o analista a criar consultas, mas o usuário deve ter acesso somente às informações necessárias.
 
-2.1 Por que essa solução é melhor?
+Nesse cenário, uma view pode disponibilizar apenas os dados relacionados às vendas e à localização. O banco de dados continua controlando as permissões.
 
-A solução proposta apresenta uma combinação de segurança e produtividade.
+Assim, mesmo que a IA gere uma consulta tentando acessar informações que o usuário não possui permissão para consultar, o PostgreSQL pode bloquear o acesso, desde que as permissões estejam configuradas corretamente.
 
-O usuário continua podendo utilizar IA para construir consultas e realizar análises, mas a quantidade de informações disponíveis é limitada.
+3. Referências
 
-Se a IA gerar uma consulta inadequada tentando acessar uma coluna que não está disponível na View, o próprio controle de permissões do banco impede o acesso, desde que a configuração das permissões esteja correta.
+AUTIO, Chloe et al. Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile. NIST AI 600-1. 2024. Disponível em: https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence. Acesso em: 16 ago. 2026.
 
-Isso demonstra um princípio importante:
+NIST. Least Privilege. Computer Security Resource Center Glossary. Disponível em: https://csrc.nist.gov/glossary/term/least_privilege. Acesso em: 16 ago. 2026.
 
-A segurança não deve depender somente de o usuário ou a IA fazer a coisa certa. Ela deve ser construída no próprio ambiente do banco de dados.
+POSTGRESQL GLOBAL DEVELOPMENT GROUP. PostgreSQL Documentation: Database Roles. Disponível em: https://www.postgresql.org/docs/18/user-manag.html. Acesso em: 16 ago. 2026.
 
-2.2 Limitações da solução
+POSTGRESQL GLOBAL DEVELOPMENT GROUP. PostgreSQL Documentation: Privileges. Disponível em: https://www.postgresql.org/docs/current/ddl-priv.html. Acesso em: 16 ago. 2026.
 
-Apesar das vantagens, a solução não elimina todos os riscos.
+POSTGRESQL GLOBAL DEVELOPMENT GROUP. PostgreSQL Documentation: CREATE VIEW. Disponível em: https://www.postgresql.org/docs/current/sql-createview.html. Acesso em: 16 ago. 2026.
 
-Uma View mal configurada pode não oferecer a proteção esperada. Da mesma forma, uma Role com privilégios excessivos pode permitir acesso indevido.
+BRASIL. Lei nº 13.709, de 14 de agosto de 2018 — Lei Geral de Proteção de Dados Pessoais (LGPD). Disponível em: https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm. Acesso em: 16 ago. 2026.
 
-Além disso, consultas autorizadas ainda podem consumir muitos recursos.
+4. Conclusões
 
-Por isso, a segurança deve ser tratada como um conjunto de mecanismos e não como uma única tecnologia.
+A utilização de IA em bancos de dados pode trazer benefícios importantes, principalmente para a criação de consultas e realização de análises.
 
-O NIST destaca justamente a importância de uma abordagem de gerenciamento de riscos para sistemas de IA, considerando diferentes etapas e diferentes tipos de risco.
+Entretanto, o acesso aos dados deve ser controlado. O uso de menor privilégio, roles, views, permissões, auditoria e monitoramento ajuda a reduzir os riscos.
 
-3. Conclusão
+Também ficou claro que o DBA continua tendo um papel fundamental. Ele deve controlar os acessos, acompanhar o desempenho, proteger os dados e ajudar a definir políticas para utilização da IA.
 
-A utilização de Inteligência Artificial em bancos de dados apresenta oportunidades importantes para aumentar a produtividade de usuários especialistas e facilitar a criação de consultas SQL.
+O grupo conclui que a melhor solução não é proibir a IA nem permitir acesso irrestrito. A melhor alternativa é utilizar a IA como ferramenta de apoio, mantendo o controle dos dados e da segurança no banco de dados.
 
-Entretanto, a facilidade proporcionada pela IA não significa que ela deva receber acesso irrestrito aos dados.
-
-A análise realizada neste trabalho demonstra que a melhor estratégia é permitir o uso da IA dentro de uma arquitetura controlada. Essa arquitetura deve utilizar o princípio do menor privilégio, Roles, Views, permissões específicas, auditoria e, quando possível, separação entre ambientes de produção e análise.
-
-Também foi possível observar que o papel do DBA continua sendo fundamental. Com a utilização de IA, o DBA passa a ter ainda mais importância na definição das políticas de acesso, segurança, desempenho e governança.
-
-Outro ponto importante é que o nível de conhecimento de um usuário não deve determinar sozinho o nível de acesso aos dados. Um usuário especialista pode possuir grande conhecimento técnico e, mesmo assim, não necessitar de acesso a informações pessoais ou confidenciais.
-
-Portanto, a posição defendida pelo grupo é que a IA não deve substituir o controle do DBA nem receber privilégios superiores aos necessários. Ela deve funcionar como uma ferramenta auxiliar dentro de uma arquitetura de segurança definida pela organização.
-
-Dessa forma, é possível aproveitar os benefícios da Inteligência Artificial sem abandonar os princípios de segurança, privacidade, governança e proteção dos dados.
-
-4. Referências
-
-AUTIO, Chloe; SCHWARTZ, Reva; DUNIETZ, Jesse; JAIN, Shomik; STANLEY, Martin; TABASSI, Elham; HALL, Patrick; ROBERTS, Kamie. Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile. NIST AI 600-1. National Institute of Standards and Technology, 2024. Disponível em: https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence. Acesso em: 16 ago. 2026.
-
-NATIONAL INSTITUTE OF STANDARDS AND TECHNOLOGY (NIST). Least Privilege. Computer Security Resource Center Glossary. Disponível em: https://csrc.nist.gov/glossary/term/least_privilege. Acesso em: 16 ago. 2026.
-
-POSTGRESQL GLOBAL DEVELOPMENT GROUP. PostgreSQL Documentation: Database Roles. PostgreSQL 18. Disponível em: https://www.postgresql.org/docs/18/user-manag.html. Acesso em: 16 ago. 2026.
-
-POSTGRESQL GLOBAL DEVELOPMENT GROUP. PostgreSQL Documentation: Privileges. PostgreSQL 18. Disponível em: https://www.postgresql.org/docs/current/ddl-priv.html. Acesso em: 16 ago. 2026.
-
-POSTGRESQL GLOBAL DEVELOPMENT GROUP. PostgreSQL Documentation: CREATE VIEW. PostgreSQL 18. Disponível em: https://www.postgresql.org/docs/current/sql-createview.html. Acesso em: 16 ago. 2026.
-
-BRASIL. Lei nº 13.709, de 14 de agosto de 2018 — Lei Geral de Proteção de Dados Pessoais (LGPD). Brasília, DF. Disponível em: https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709compilado.htm. Acesso em: 16 ago. 2026.
+Dessa forma, é possível aproveitar os benefícios da IA sem deixar de lado a segurança, a privacidade, a integridade e a conformidade com a LGPD.
