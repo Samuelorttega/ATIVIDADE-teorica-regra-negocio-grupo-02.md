@@ -1,5 +1,7 @@
 # ATIVIDADE-teorica-regra-negocio-grupo-02.md
+
 **Aluno(s):** 
+
 1.Lucas Moretti Izel Do Carmo 
 2.Paulo Emilio De Souza Fagundes 3.Samuel Jose Ortega Jimenez 
 
