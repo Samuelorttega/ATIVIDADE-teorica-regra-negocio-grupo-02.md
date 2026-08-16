@@ -197,3 +197,5 @@ AUTIO, Chloe et al. Artificial Intelligence Risk Management Framework: Generativ
  O grupo conclui que a melhor solução não é proibir a IA nem permitir acesso irrestrito. A melhor alternativa é utilizar a IA como ferramenta de apoio, mantendo o controle dos dados e da segurança no banco de dados.
 
  Dessa forma, é possível aproveitar os benefícios da IA sem deixar de lado a segurança, a privacidade, a integridade e a conformidade com a LGPD.
+
+## Repositorio Git: https://github.com/Samuelorttega/ATIVIDADE-teorica-regra-negocio-grupo-02.md
