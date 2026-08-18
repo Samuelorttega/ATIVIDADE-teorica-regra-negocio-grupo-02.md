@@ -8,6 +8,8 @@
 
 3.Samuel Jose Ortega Jimenez 
 
+4.Anna Carolina Mourão Vieira da Silva
+
 **Turma:** G2 BANCO DE DADOS 
 
 **Data:** 16/08/2026 
